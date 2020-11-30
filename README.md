@@ -17,7 +17,7 @@ Then _vagrant up_, _vagrant ssh_, _cd vagrant_ and let's crack on.
 
 ### Essential Commands
 
-Count the number of lines in lorem.txt
+#### Count the number of lines in lorem.txt
 
 ```
 /vagrant$ wc -l lorem.txt 
@@ -40,7 +40,7 @@ Newline appended
 %q
 ```
 
-Delete lines 208 to 210 inclusive.
+#### Delete lines 208 to 210 inclusive.
 
 ```
 /vagrant$ ed -p% lorem.txt 
@@ -54,14 +54,20 @@ Delete lines 208 to 210 inclusive.
 59281
 ```
 
-Replace every occurrence of the word Consetetur with an uppercase C with the word Cricket.
+#### Replace every occurrence of the word Consetetur with an uppercase C with the word Cricket.
 
 ```
-TODO
+/vagrant$ sed -i 's/Consetetur/Cricket/g' lorem.txt
 ```
 
-Add a new line at the very end of the document that contains _Lorem ipsum_.
+s is the substitute command for sed to find and replace.
+g means substitute globally (without this option the first occurance will be replaced).
+To find and replace in case insensitive manner we would use the I option i.e. 's/Consetetur/Cricket/gI'
+-i means update the file.
+
+
+#### Add a new line at the very end of the document that contains _Lorem ipsum_.
 
 ```
-TODO
+/vagrant$ printf '\nLorem ipsum' >> lorem.txt
 ``` 
