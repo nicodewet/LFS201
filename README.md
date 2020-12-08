@@ -90,7 +90,7 @@ $ sudo xz -k /opt/SAMPLE0001.tar
 
 #### Finding files exercises
 
-
+Find all directories in the /vagrant/FILES 
 
 ### Operation of Running System
 
