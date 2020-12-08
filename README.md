@@ -90,7 +90,87 @@ $ sudo xz -k /opt/SAMPLE0001.tar
 
 #### Finding files exercises
 
-Find all directories in the /vagrant/FILES 
+See [40 Best Examples of Find command in Linux](https://geekflare.com/linux-find-commands/) as a reference.
+
+##### Find all directories in `/vagrant/FILES`.
+
+```
+$ find /vagrant/FIND -type d
+/vagrant/FIND
+/vagrant/FIND/empty
+/vagrant/FIND/somedir
+/vagrant/FIND/another
+```
+
+##### Find all files in `/vagrant/FILES` (result not shown for brevity), then count them.
+
+```
+$ find /vagrant/FIND -type f
+$ find /vagrant/FIND -type f | wc -l
+14
+```
+
+##### Find all files with case-insensitive word `heythere` in title.
+
+```
+$ find /vagrant/FIND -type f -iname heythere*
+/vagrant/FIND/somedir/HEYthERE1.sh
+/vagrant/FIND/somedir/heythere.sh
+```
+
+##### Find all executable files.
+
+```
+$ find /vagrant/FIND -type f -executable
+/vagrant/FIND/exec2.sh
+/vagrant/FIND/exec1.sh
+/vagrant/FIND/somedir/surprise.sh
+```
+
+##### Find all files containing the case sensitive word `kiwi`. 
+
+The `-l` option in `grep` means `--files-with-matches` which will suppress normal output and instead print the name of each input file from which
+output would normally be printed.
+
+Note with `find (GNU findutils) 4.7.0-git` the `;` needs to be escaped else you'll get `find: missing argument to -exec`.
+
+```
+$ find /vagrant/FIND -type f -exec grep -l "kiwi" {} \;
+/vagrant/FIND/hey
+/vagrant/FIND/bob
+```
+
+##### Find all files larger than 512kb in size
+
+```
+$ find /vagrant/FIND -type f -size +512k
+/vagrant/FIND/somedir/ddgenfile.img
+```
+
+Even better include the actual file size in human readable format as follows.
+
+```
+$ find /vagrant/FIND -type f -size +512k -exec du -h {} \;
+1.0M	/vagrant/FIND/somedir/ddgenfile.img
+```
+
+##### Find all empty files
+
+##### Find all files that have not been accessed in the last month
+
+#### Find all files that have not been modified in the last month
+
+##### Find all files containing the case insensitive word `kiwi`.
+
+The `-i` means ignore case distinctions, so that characters that differ only in case match each other.
+
+```
+$ find /vagrant/FIND -type f -exec grep -l -i "kiwi" {} \;
+$ find /vagrant/FIND -type f -exec grep --files-with-matches  --ignore-case "kiwi" {} \;
+/vagrant/FIND/super.txt
+/vagrant/FIND/hey
+/vagrant/FIND/bob
+```
 
 ### Operation of Running System
 
@@ -397,3 +477,50 @@ $ sudo mount -o loop /dev/loop0 /mnt/backup
 ```
 $ sudo fdisk -l
 ```
+
+### File System
+
+#### Get the file system block size in bytes
+
+The `-l` option lists the contents of the filesystem superblock, including the current values of the parameters 
+that can be set via this program.
+
+```
+$ sudo tune2fs -l | grep -i 'block size'
+Block size:               4096
+```
+
+#### How much hard drive space is taken up (`devoted`) by a 2 byte file
+
+The minimum amount of file system real estate (hard drive blocks) that can be devoted to a file is 1 block and
+so is determined by the file system block size which can be found as follows and in this case it is 4 KB.
+
+```
+$ sudo tune2fs -l | grep -i 'block size'
+Block size:               4096
+``` 
+
+#### Explain `du` output on a one character file `echo "1" > geek.txt`
+
+See [How to Get the Size of a File of Directory in Linux](https://www.howtogeek.com/450366/how-to-get-the-size-of-a-file-or-directory-in-linux/) as background.
+
+```
+$ echo "1" > geek.txt
+$ hexdump -C geek.txt
+00000000  31 0a                                             |1.|
+00000002
+$ du geek.txt
+4	geek.txt
+$ sudo tune2fs -l /dev/sda1 | grep -i 'block size'
+Block size:               4096
+```
+
+From the above we know geek.txt is composed of 2 bytes for `1` and a line feed character. Because we know the default block size
+is `4096` bytes the `du geek.txt` output must mean `du` is using the default assumption of 1024 bytes per block and so reports
+that we have `4` 1024 byte blocks for geek.txt which matches the minimum block size of `4096` bytes.
+
+#### List the apparent sizes on `/home` rather than the disk usage
+
+```
+$ sudo du --apparent-size /home -h
+``` 
