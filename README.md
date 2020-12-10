@@ -154,11 +154,47 @@ $ find /vagrant/FIND -type f -size +512k -exec du -h {} \;
 1.0M	/vagrant/FIND/somedir/ddgenfile.img
 ```
 
-##### Find all empty files
+##### Find all empty files in `/vagrant/FIND`
 
-##### Find all files that have not been accessed in the last month
+```
+$ find /vagrant/FIND/ -type f -empty
+```
 
-#### Find all files that have not been modified in the last month
+To sanity check:
+
+```
+$ find /vagrant/FIND/ -type f -empty -exec du {} \;
+```
+
+#### Find all directories in in `/vagrant/FIND` larger than 20kb
+
+```
+```
+
+##### Find all files in `/vagrant/FIND` that have not been accessed in the last month
+
+```
+```
+
+##### Find all files in `/vagrant/FIND` that have not been modified in the last month
+
+```
+```
+
+##### Find all executable files in `/vagrant/FIND` and delete them
+
+```
+```
+
+##### Find all empty files in `/vagrant/FIND` and delete them
+
+```
+```
+
+##### Find all files in `/vagrant/FIND` with `.txt` extension and write with full path to `/vagrant/FIND/compress.txt`
+
+```
+```
 
 ##### Find all files containing the case insensitive word `kiwi`.
 
