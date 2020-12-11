@@ -110,7 +110,7 @@ $ find /vagrant/FIND -type f | wc -l
 14
 ```
 
-##### Find all files with case-insensitive word `heythere` in title.
+##### Find all files in `/vagrant/FIND` with case-insensitive word `heythere` in title.
 
 ```
 $ find /vagrant/FIND -type f -iname heythere*
@@ -118,7 +118,7 @@ $ find /vagrant/FIND -type f -iname heythere*
 /vagrant/FIND/somedir/heythere.sh
 ```
 
-##### Find all executable files.
+##### Find all executable files in `/vagrant/FIND`
 
 ```
 $ find /vagrant/FIND -type f -executable
@@ -127,7 +127,7 @@ $ find /vagrant/FIND -type f -executable
 /vagrant/FIND/somedir/surprise.sh
 ```
 
-##### Find all files containing the case sensitive word `kiwi`. 
+##### Find all files in `/vagrant/FIND` containing the case sensitive word `kiwi`. 
 
 The `-l` option in `grep` means `--files-with-matches` which will suppress normal output and instead print the name of each input file from which
 output would normally be printed.
@@ -140,7 +140,7 @@ $ find /vagrant/FIND -type f -exec grep -l "kiwi" {} \;
 /vagrant/FIND/bob
 ```
 
-##### Find all files larger than 512kb in size
+##### Find all files in `/vagrant/FIND` larger than 512kb in size
 
 ```
 $ find /vagrant/FIND -type f -size +512k
@@ -166,34 +166,45 @@ To sanity check:
 $ find /vagrant/FIND/ -type f -empty -exec du {} \;
 ```
 
-#### Find all directories in in `/vagrant/FIND` larger than 20kb
+#### Find all directories in `/vagrant/FIND` larger than 20kb
 
 ```
+$ find /vagrant/FIND -type d -size +20k
 ```
 
-##### Find all files in `/vagrant/FIND` that have not been accessed in the last month
+##### Find all files in `/vagrant/FIND` that have not been accessed in the last 30 days
 
 ```
+$ find /vagrant/FIND -type f -atime +30
 ```
 
-##### Find all files in `/vagrant/FIND` that have not been modified in the last month
+##### Find all files in `/vagrant/FIND` that have not been modified in the last 30 days
 
 ```
+$ find /vagrant/FIND -type f -mtime +30
 ```
 
 ##### Find all executable files in `/vagrant/FIND` and delete them
 
 ```
+$ find /vagrant/FIND -type f -executable
+$ find /vagrant/FIND -type f -executable -exec rm {} \;
+$ find /vagrant/FIND -type f -executable
 ```
 
 ##### Find all empty files in `/vagrant/FIND` and delete them
 
 ```
+$ find /vagrant/FIND -type f -empty
+$ find /vagrant/FIND -type f -empty -exec rm {} \;
+$ find /vagrant/FIND -type f -empty
 ```
 
 ##### Find all files in `/vagrant/FIND` with `.txt` extension and write with full path to `/vagrant/FIND/compress.txt`
 
 ```
+$ find /vagrant/FIND -type f -name "*.txt"
+$ find /vagrant/FIND -type f -name "*.txt" > /vagrant/FIND/compress.txt
 ```
 
 ##### Find all files containing the case insensitive word `kiwi`.
