@@ -1,10 +1,12 @@
-### Obtain a full list of directories under `/` along with their size
+# Essential Commands
+
+## Obtain a full list of directories under `/` along with their size
 
 ```
 $ sudo du --max-depth=1 -hx /
 ```
 
-### Count the number of lines in lorem.txt
+## Count the number of lines in lorem.txt
 
 ```
 /vagrant$ wc -l lorem.txt 
@@ -27,7 +29,7 @@ Newline appended
 %q
 ```
 
-### Delete lines 208 to 210 inclusive.
+## Delete lines 208 to 210 inclusive.
 
 ```
 /vagrant$ ed -p% lorem.txt 
@@ -41,7 +43,7 @@ Newline appended
 59281
 ```
 
-### Replace every occurrence of the word Consetetur with an uppercase C with the word Cricket.
+## Replace every occurrence of the word Consetetur with an uppercase C with the word Cricket.
 
 ```
 /vagrant$ sed -i 's/Consetetur/Cricket/g' lorem.txt
@@ -53,13 +55,13 @@ To find and replace in case insensitive manner we would use the I option i.e. 's
 -i means update the file.
 
 
-### Add a new line at the very end of the document that contains _Lorem ipsum_.
+## Add a new line at the very end of the document that contains _Lorem ipsum_.
 
 ```
 /vagrant$ printf '\nLorem ipsum' >> lorem.txt
 ```
 
-### Archive and compression exercises
+## Archive and compression exercises
 
 - Create a /opt/tmp001.zip file out of /tmp
 - Extract all files from archive file /opt/tmp001.zip into target directory /opt/SAMPLE001
@@ -75,11 +77,11 @@ $ sudo tar -cvf /opt/SAMPLE0001.tar /opt/SAMPLE001/
 $ sudo xz -k /opt/SAMPLE0001.tar
 ``` 
 
-### Finding files exercises
+## Finding files exercises
 
 See [40 Best Examples of Find command in Linux](https://geekflare.com/linux-find-commands/) as a reference.
 
-### Find all directories in `/vagrant/FILES`.
+## Find all directories in `/vagrant/FILES`.
 
 ```
 $ find /vagrant/FIND -type d
@@ -89,7 +91,7 @@ $ find /vagrant/FIND -type d
 /vagrant/FIND/another
 ```
 
-### Find all files in `/vagrant/FILES` (result not shown for brevity), then count them.
+## Find all files in `/vagrant/FILES` (result not shown for brevity), then count them.
 
 ```
 $ find /vagrant/FIND -type f
@@ -97,7 +99,7 @@ $ find /vagrant/FIND -type f | wc -l
 14
 ```
 
-### Find all files in `/vagrant/FIND` with case-insensitive word `heythere` in title.
+## Find all files in `/vagrant/FIND` with case-insensitive word `heythere` in title.
 
 ```
 $ find /vagrant/FIND -type f -iname heythere*
@@ -105,7 +107,7 @@ $ find /vagrant/FIND -type f -iname heythere*
 /vagrant/FIND/somedir/heythere.sh
 ```
 
-### Find all executable files in `/vagrant/FIND`
+## Find all executable files in `/vagrant/FIND`
 
 ```
 $ find /vagrant/FIND -type f -executable
@@ -114,7 +116,7 @@ $ find /vagrant/FIND -type f -executable
 /vagrant/FIND/somedir/surprise.sh
 ```
 
-### Find all files in `/vagrant/FIND` containing the case sensitive word `kiwi`. 
+## Find all files in `/vagrant/FIND` containing the case sensitive word `kiwi`. 
 
 The `-l` option in `grep` means `--files-with-matches` which will suppress normal output and instead print the name of each input file from which
 output would normally be printed.
@@ -127,7 +129,7 @@ $ find /vagrant/FIND -type f -exec grep -l "kiwi" {} \;
 /vagrant/FIND/bob
 ```
 
-### Find all files in `/vagrant/FIND` larger than 512kb in size
+## Find all files in `/vagrant/FIND` larger than 512kb in size
 
 ```
 $ find /vagrant/FIND -type f -size +512k
@@ -141,7 +143,7 @@ $ find /vagrant/FIND -type f -size +512k -exec du -h {} \;
 1.0M	/vagrant/FIND/somedir/ddgenfile.img
 ```
 
-### Find all empty files in `/vagrant/FIND`
+## Find all empty files in `/vagrant/FIND`
 
 ```
 $ find /vagrant/FIND/ -type f -empty
@@ -153,25 +155,25 @@ To sanity check:
 $ find /vagrant/FIND/ -type f -empty -exec du {} \;
 ```
 
-### Find all directories in `/vagrant/FIND` larger than 20kb
+## Find all directories in `/vagrant/FIND` larger than 20kb
 
 ```
 $ find /vagrant/FIND -type d -size +20k
 ```
 
-### Find all files in `/vagrant/FIND` that have not been accessed in the last 30 days
+## Find all files in `/vagrant/FIND` that have not been accessed in the last 30 days
 
 ```
 $ find /vagrant/FIND -type f -atime +30
 ```
 
-### Find all files in `/vagrant/FIND` that have not been modified in the last 30 days
+## Find all files in `/vagrant/FIND` that have not been modified in the last 30 days
 
 ```
 $ find /vagrant/FIND -type f -mtime +30
 ```
 
-### Find all executable files in `/vagrant/FIND` and delete them
+## Find all executable files in `/vagrant/FIND` and delete them
 
 ```
 $ find /vagrant/FIND -type f -executable
@@ -179,7 +181,7 @@ $ find /vagrant/FIND -type f -executable -exec rm {} \;
 $ find /vagrant/FIND -type f -executable
 ```
 
-### Find all empty files in `/vagrant/FIND` and delete them
+## Find all empty files in `/vagrant/FIND` and delete them
 
 ```
 $ find /vagrant/FIND -type f -empty
@@ -187,14 +189,14 @@ $ find /vagrant/FIND -type f -empty -exec rm {} \;
 $ find /vagrant/FIND -type f -empty
 ```
 
-### Find all files in `/vagrant/FIND` with `.txt` extension and write with full path to `/vagrant/FIND/compress.txt`
+## Find all files in `/vagrant/FIND` with `.txt` extension and write with full path to `/vagrant/FIND/compress.txt`
 
 ```
 $ find /vagrant/FIND -type f -name "*.txt"
 $ find /vagrant/FIND -type f -name "*.txt" > /vagrant/FIND/compress.txt
 ```
 
-### Find all files containing the case insensitive word `kiwi`.
+## Find all files containing the case insensitive word `kiwi`.
 
 The `-i` means ignore case distinctions, so that characters that differ only in case match each other.
 
