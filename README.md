@@ -13,17 +13,15 @@ As per the Vagrantfile first install these to get a virtual local Ubuntu Ubuntu 
 
 Then `vagrant up`, `vagrant ssh`, `cd vagrant` and let's crack on.
 
-## Cracking On
+## Essential Commands
 
-### Essential Commands
-
-#### Obtain a full list of directories under `/` along with their size
+### Obtain a full list of directories under `/` along with their size
 
 ```
 $ sudo du --max-depth=1 -hx /
 ```
 
-#### Count the number of lines in lorem.txt
+### Count the number of lines in lorem.txt
 
 ```
 /vagrant$ wc -l lorem.txt 
@@ -46,7 +44,7 @@ Newline appended
 %q
 ```
 
-#### Delete lines 208 to 210 inclusive.
+### Delete lines 208 to 210 inclusive.
 
 ```
 /vagrant$ ed -p% lorem.txt 
@@ -60,7 +58,7 @@ Newline appended
 59281
 ```
 
-#### Replace every occurrence of the word Consetetur with an uppercase C with the word Cricket.
+### Replace every occurrence of the word Consetetur with an uppercase C with the word Cricket.
 
 ```
 /vagrant$ sed -i 's/Consetetur/Cricket/g' lorem.txt
@@ -72,13 +70,13 @@ To find and replace in case insensitive manner we would use the I option i.e. 's
 -i means update the file.
 
 
-#### Add a new line at the very end of the document that contains _Lorem ipsum_.
+### Add a new line at the very end of the document that contains _Lorem ipsum_.
 
 ```
 /vagrant$ printf '\nLorem ipsum' >> lorem.txt
 ```
 
-#### Archive and compression exercises
+### Archive and compression exercises
 
 - Create a /opt/tmp001.zip file out of /tmp
 - Extract all files from archive file /opt/tmp001.zip into target directory /opt/SAMPLE001
@@ -94,11 +92,11 @@ $ sudo tar -cvf /opt/SAMPLE0001.tar /opt/SAMPLE001/
 $ sudo xz -k /opt/SAMPLE0001.tar
 ``` 
 
-#### Finding files exercises
+### Finding files exercises
 
 See [40 Best Examples of Find command in Linux](https://geekflare.com/linux-find-commands/) as a reference.
 
-##### Find all directories in `/vagrant/FILES`.
+#### Find all directories in `/vagrant/FILES`.
 
 ```
 $ find /vagrant/FIND -type d
@@ -108,7 +106,7 @@ $ find /vagrant/FIND -type d
 /vagrant/FIND/another
 ```
 
-##### Find all files in `/vagrant/FILES` (result not shown for brevity), then count them.
+#### Find all files in `/vagrant/FILES` (result not shown for brevity), then count them.
 
 ```
 $ find /vagrant/FIND -type f
@@ -116,7 +114,7 @@ $ find /vagrant/FIND -type f | wc -l
 14
 ```
 
-##### Find all files in `/vagrant/FIND` with case-insensitive word `heythere` in title.
+#### Find all files in `/vagrant/FIND` with case-insensitive word `heythere` in title.
 
 ```
 $ find /vagrant/FIND -type f -iname heythere*
@@ -124,7 +122,7 @@ $ find /vagrant/FIND -type f -iname heythere*
 /vagrant/FIND/somedir/heythere.sh
 ```
 
-##### Find all executable files in `/vagrant/FIND`
+#### Find all executable files in `/vagrant/FIND`
 
 ```
 $ find /vagrant/FIND -type f -executable
@@ -133,7 +131,7 @@ $ find /vagrant/FIND -type f -executable
 /vagrant/FIND/somedir/surprise.sh
 ```
 
-##### Find all files in `/vagrant/FIND` containing the case sensitive word `kiwi`. 
+#### Find all files in `/vagrant/FIND` containing the case sensitive word `kiwi`. 
 
 The `-l` option in `grep` means `--files-with-matches` which will suppress normal output and instead print the name of each input file from which
 output would normally be printed.
@@ -146,7 +144,7 @@ $ find /vagrant/FIND -type f -exec grep -l "kiwi" {} \;
 /vagrant/FIND/bob
 ```
 
-##### Find all files in `/vagrant/FIND` larger than 512kb in size
+#### Find all files in `/vagrant/FIND` larger than 512kb in size
 
 ```
 $ find /vagrant/FIND -type f -size +512k
@@ -160,7 +158,7 @@ $ find /vagrant/FIND -type f -size +512k -exec du -h {} \;
 1.0M	/vagrant/FIND/somedir/ddgenfile.img
 ```
 
-##### Find all empty files in `/vagrant/FIND`
+#### Find all empty files in `/vagrant/FIND`
 
 ```
 $ find /vagrant/FIND/ -type f -empty
@@ -172,25 +170,25 @@ To sanity check:
 $ find /vagrant/FIND/ -type f -empty -exec du {} \;
 ```
 
-#### Find all directories in `/vagrant/FIND` larger than 20kb
+### Find all directories in `/vagrant/FIND` larger than 20kb
 
 ```
 $ find /vagrant/FIND -type d -size +20k
 ```
 
-##### Find all files in `/vagrant/FIND` that have not been accessed in the last 30 days
+#### Find all files in `/vagrant/FIND` that have not been accessed in the last 30 days
 
 ```
 $ find /vagrant/FIND -type f -atime +30
 ```
 
-##### Find all files in `/vagrant/FIND` that have not been modified in the last 30 days
+#### Find all files in `/vagrant/FIND` that have not been modified in the last 30 days
 
 ```
 $ find /vagrant/FIND -type f -mtime +30
 ```
 
-##### Find all executable files in `/vagrant/FIND` and delete them
+#### Find all executable files in `/vagrant/FIND` and delete them
 
 ```
 $ find /vagrant/FIND -type f -executable
@@ -198,7 +196,7 @@ $ find /vagrant/FIND -type f -executable -exec rm {} \;
 $ find /vagrant/FIND -type f -executable
 ```
 
-##### Find all empty files in `/vagrant/FIND` and delete them
+#### Find all empty files in `/vagrant/FIND` and delete them
 
 ```
 $ find /vagrant/FIND -type f -empty
@@ -206,14 +204,14 @@ $ find /vagrant/FIND -type f -empty -exec rm {} \;
 $ find /vagrant/FIND -type f -empty
 ```
 
-##### Find all files in `/vagrant/FIND` with `.txt` extension and write with full path to `/vagrant/FIND/compress.txt`
+#### Find all files in `/vagrant/FIND` with `.txt` extension and write with full path to `/vagrant/FIND/compress.txt`
 
 ```
 $ find /vagrant/FIND -type f -name "*.txt"
 $ find /vagrant/FIND -type f -name "*.txt" > /vagrant/FIND/compress.txt
 ```
 
-##### Find all files containing the case insensitive word `kiwi`.
+#### Find all files containing the case insensitive word `kiwi`.
 
 The `-i` means ignore case distinctions, so that characters that differ only in case match each other.
 
@@ -225,11 +223,11 @@ $ find /vagrant/FIND -type f -exec grep --files-with-matches  --ignore-case "kiw
 /vagrant/FIND/bob
 ```
 
-### Operation of Running System
+## Operation of Running System
 
 See [this resource for AWK background](https://www.grymoire.com/Unix/Awk.html).
 
-#### Basic bash script: invoking user and default gateway IP
+### Basic bash script: invoking user and default gateway IP
 
 Create script /vagrant/test.sh which must:
 * be invokeable as ./test.sh
@@ -245,7 +243,7 @@ echo $(whoami)
 route -n | awk '{if ($4=="UG") print $2}'
 ```
 
-#### Basic bash script: print file name and owner from ls -l command
+### Basic bash script: print file name and owner from ls -l command
 
 Preparation.
 
@@ -273,7 +271,7 @@ Now use the script as follows:
 $ ls -l | FileOwner.awk
 ```
 
-#### Basic script: print all user names that do not have a password
+### Basic script: print all user names that do not have a password
 
 This solution uses AWK's ability to process files that do not use whitespace as a separator. We use the AWK _FS Input Field Seperator Variable_ to set the input field seperator.
 
@@ -292,13 +290,13 @@ BEGIN
 }
 ```
 
-#### Install the tmux package
+### Install the tmux package
 
 ```
 $ sudo apt install tmux
 ```
 
-#### Cron job
+### Cron job
 
 Create a cron job that kills all processes named `scan_filesystem` which is owned by `root`, every minute.
 
@@ -325,9 +323,9 @@ Now as a test do this and you should see the process terminated (do it in two wi
 Terminated
 ``` 
 
-### User & Group Management
+## User & Group Management
 
-#### folder group ownership
+### folder group ownership
 
 - Add a compute group
 - Add a /exam/compute folder (both at the same time)
@@ -339,7 +337,7 @@ $ sudo addgroup compute
 $ sudo chown -R :compute /exam/compute
 ```
 
-#### add user with password and sudo without password promopt
+### add user with password and sudo without password promopt
 
 ```
 sudo useradd candidate
@@ -350,7 +348,7 @@ vagrant ALL=(ALL) NOPASSWD:ALL
 candidate ALL=(ALL) NOPASSWD:ALL
 ```
 
-#### empty NEWS file auto create in home dir of any new user
+### empty NEWS file auto create in home dir of any new user
 
 ```
 $ sudo touch /etc/skel/NEWS
@@ -359,13 +357,13 @@ SKEL=/etc/skel
 $ sudo useradd --create-home linda
 ```
 
-#### create a group called students
+### create a group called students
 
 ```
 $ sudo groupadd students
 ```
 
-#### create particular new user
+### create particular new user
 
 - username `zak`
 - password `magic`
@@ -382,7 +380,7 @@ PATH=$PATH:/home/school/zak/binaries/
 $ sudo chown zak:zak /home/school/zak/binaries
 ```
 
-#### create a particular sysadmin user
+### create a particular sysadmin user
 
 - username `sysadmin`
 - password `science`
@@ -401,7 +399,7 @@ candidate ALL=(ALL) NOPASSWD:ALL
 sysadmin ALL=(ALL) NOPASSWD:ALL
 ```
 
-#### all users must be able to execute `last` command
+### all users must be able to execute `last` command
 
 The last command shows a listing of last logged in users.
 
@@ -409,7 +407,7 @@ The last command shows a listing of last logged in users.
 $ sudo chmod a+x  /usr/bin/last
 ```
 
-#### make changes to `zak` user
+### make changes to `zak` user
 
 - password to: `_foo123_`
 - home dir to: /home/zak
@@ -420,7 +418,7 @@ $ sudo usermod zak -d /home/zak -m -s /usr/bin/zsh
 $ sudo passwd zak
 ```
 
-#### create user `foo` that has a password but cannot log into the system
+### create user `foo` that has a password but cannot log into the system
 
 This must be a user that can later log in, and so not a system user and it can have a home dir.
 
@@ -429,7 +427,7 @@ $ sudo usermod foo -s /usr/sbin/nologin
 $ sudo passwd foo
 ```
 
-#### alter the `foo` user so that it can log into the system
+### alter the `foo` user so that it can log into the system
 
 The user's shell goes from `/usr/sbin/nologin` to `/bin/bash`.
 
@@ -437,9 +435,9 @@ The user's shell goes from `/usr/sbin/nologin` to `/bin/bash`.
 $ sudo usermod foo -s /bin/bash
 ```
 
-### Networking
+## Networking
 
-#### find which port/protocol postgresql is meant to use
+### find which port/protocol postgresql is meant to use
 
 ```
 $ grep postgres /etc/services
@@ -455,13 +453,13 @@ $ grep postgres /etc/services | awk '{print $2}'
 5432/udp
 ```
 
-#### show all network devices
+### show all network devices
 
 ```
 $ ip link show
 ```
 
-#### get the `PID/Program name` listening on UDP and TCP ports
+### get the `PID/Program name` listening on UDP and TCP ports
 
 Use `sudo` to get the `PID/Program name`. The `ss` command provides richer output.
 
@@ -472,7 +470,7 @@ $ sudo ss --tcp --udp --listening --numeric --processes
 $ sudo ss tulnp
 ```
 
-#### find which process is listening on port 22
+### find which process is listening on port 22
 
 Using the list open files command: `lsof`
 
@@ -480,15 +478,15 @@ Using the list open files command: `lsof`
 $ sudo lsof -iTCP:22 -sTCP:LISTEN
 ```
 
-#### find which processes are listening on ssh ports as defined in `/etc/services`
+### find which processes are listening on ssh ports as defined in `/etc/services`
 
 ```
 $ sudo lsof -iTCP:ssh -sTCP:LISTEN
 ```
 
-### Storage Management
+## Storage Management
 
-#### Create a virtual loop device `/dev/loop0` using 1GB file `/root/loopbackfile.img` with ext4 filesystem
+### Create a virtual loop device `/dev/loop0` using 1GB file `/root/loopbackfile.img` with ext4 filesystem
 
 Do not mount the device (we'll do that in the next step). Note `man losteup` has a handy example.
 
@@ -500,7 +498,7 @@ $ sudo losetup --all
 $ sudo mkfs.ext4 /root/loopbackfile.img
 ```
 
-#### Temporarily mount `/dev/loop0` on `/mnt/backup`, make a `.tar.bz2` file on `/mnt/backup`, then unmount
+### Temporarily mount `/dev/loop0` on `/mnt/backup`, make a `.tar.bz2` file on `/mnt/backup`, then unmount
 
 ```
 $ sudo mkdir -p /mnt/backup
@@ -518,22 +516,22 @@ Breaking down the tar commmand:
 - `-S` (--sparse): handle sparse files efficiently 
 - `-f` (--file): use specified archive file
 
-#### Temporarily mount `/dev/loop0` on `/mnt/backup`, decompress and unarchive `/mnt/backup/tmp.tar.bz2` to `/opt`
+### Temporarily mount `/dev/loop0` on `/mnt/backup`, decompress and unarchive `/mnt/backup/tmp.tar.bz2` to `/opt`
 
 ```
 $ sudo tar -xvf /mnt/backup/tmp.tar.bz2 -C /opt
 $ sudo mount -o loop /dev/loop0 /mnt/backup
 ```
 
-#### List all partition table devices as mentioned in `/proc/partitions`
+### List all partition table devices as mentioned in `/proc/partitions`
 
 ```
 $ sudo fdisk -l
 ```
 
-### File System
+## File System
 
-#### Get the file system block size in bytes
+### Get the file system block size in bytes
 
 The `-l` option lists the contents of the filesystem superblock, including the current values of the parameters 
 that can be set via this program.
@@ -543,7 +541,7 @@ $ sudo tune2fs -l | grep -i 'block size'
 Block size:               4096
 ```
 
-#### How much hard drive space is taken up (`devoted`) by a 2 byte file
+### How much hard drive space is taken up (`devoted`) by a 2 byte file
 
 The minimum amount of file system real estate (hard drive blocks) that can be devoted to a file is 1 block and
 so is determined by the file system block size which can be found as follows and in this case it is 4 KB.
@@ -553,7 +551,7 @@ $ sudo tune2fs -l | grep -i 'block size'
 Block size:               4096
 ``` 
 
-#### Explain `du` output on a one character file `echo "1" > geek.txt`
+### Explain `du` output on a one character file `echo "1" > geek.txt`
 
 See [How to Get the Size of a File of Directory in Linux](https://www.howtogeek.com/450366/how-to-get-the-size-of-a-file-or-directory-in-linux/) as background.
 
@@ -572,15 +570,15 @@ From the above we know geek.txt is composed of 2 bytes for `1` and a line feed c
 is `4096` bytes the `du geek.txt` output must mean `du` is using the default assumption of 1024 bytes per block and so reports
 that we have `4` 1024 byte blocks for geek.txt which matches the minimum block size of `4096` bytes.
 
-#### List the apparent sizes on `/home` rather than the disk usage
+### List the apparent sizes on `/home` rather than the disk usage
 
 ```
 $ sudo du --apparent-size /home -h
 ``` 
 
-### Processes
+## Processes
 
-#### Print the soft limit of the number of open files
+### Print the soft limit of the number of open files
 
 ```
 $ ulimit -a
@@ -590,20 +588,20 @@ $ ulimit -S -n
 1024
 ```
 
-#### Print the hard limit for the number of open files
+### Print the hard limit for the number of open files
 
 ```
 $ ulimit -H -n
 1048576
 ```
 
-#### Increase the open file limit to 1600 for the current shell
+### Increase the open file limit to 1600 for the current shell
 
 ```
 $ ulimit -n 1600
 ```
 
-#### Modify the system configuration for `compute` group users to a soft limit of 2048
+### Modify the system configuration for `compute` group users to a soft limit of 2048
 
 ```
 $ groups
@@ -615,14 +613,14 @@ $ ulimit -S -n
 2048 
 ```
 
-#### Increase the niceness of your shell by 5
+### Increase the niceness of your shell by 5
 
 ```
 $ ps
 $ renice +5 -p 1621
 ```
 
-#### Print the shared libraries `bash` depends on
+### Print the shared libraries `bash` depends on
 
 ```
 $ ldd /bin/bash
@@ -633,20 +631,20 @@ $ ldd /bin/bash
 	/lib64/ld-linux-x86-64.so.2 (0x00007f7428e9f000)
 ```
 
-#### Send the SIGHUP signal to your own bash terminal
+### Send the SIGHUP signal to your own bash terminal
 
 ```
 $ ps
 $ kill -SIGHUP 7920
 ```
 
-#### Kill all of your own processes named `foobar`
+### Kill all of your own processes named `foobar`
 
 ```
 $ pkill -u vagrant foobar
 ```
 
-#### Make all of your own bash processes run 4 nicer
+### Make all of your own bash processes run 4 nicer
 
 This relies on `pgrep`.
 
@@ -656,9 +654,9 @@ $ renice +4 $(pgrep bash)
 8239 (process ID) old priority 0, new priority 4
 ```
 
-### Package Management: dpkg and apt
+## Package Management: dpkg and apt
 
-#### Enable source ubuntu supported repositories
+### Enable source ubuntu supported repositories
 
 Uncomment to suit here. Run `sudo apt-get update` when done modifying `/etc/apt/sources.list`.
 
@@ -667,14 +665,14 @@ $ sudo nano /etc/apt/sources.list
 $ sudo apt-get update
 ```
 
-#### List all packages installed
+### List all packages installed
 
 ```
 $ dpkg -l
 $ dpkg --list
 ```
 
-#### List all files installed by `wget` package
+### List all files installed by `wget` package
 
 ```
 $ dpkg -L wget
@@ -682,14 +680,14 @@ $ dpkg --listfiles wget
 $ apt-file list wget
 ```
 
-#### Show the status of the `wget` package
+### Show the status of the `wget` package
 
 ```
 $ dpkg -s wget
 $ dpkg --status wget
 ```
 
-#### Verify the installed `wget` package's integrity
+### Verify the installed `wget` package's integrity
 
 We'll first break the package by deleting a binary, verify then fix it.
 
@@ -703,7 +701,7 @@ $ dpkg -V wget; echo $?
 0
 ```
 
-#### Uninstall the `wget` package including it's configuration files
+### Uninstall the `wget` package including it's configuration files
 
 `-P` stands for `purge`, the `-r` option removes all of an installed package except it's configuration files.
 
@@ -714,7 +712,7 @@ $ sudo apt-get install wget
 $ sudo dpkg -s wget
 ```
 
-#### Find out which package `/etc/logrotate.conf` belongs to
+### Find out which package `/etc/logrotate.conf` belongs to
 
 ```
 $ dpkg -S /etc/logrotate.conf
@@ -725,7 +723,7 @@ $ apt-file search /etc/logrotate.conf
 logrotate: /etc/logrotate.conf
 ```
 
-#### List all packages that are upgradeable, then upgrade them all
+### List all packages that are upgradeable, then upgrade them all
 
 ```
 $ sudo apt update
@@ -733,7 +731,7 @@ $ apt list --upgradeable
 $ sudo apt -y upgrade
 ```
 
-#### Perform `apt` clenup operations
+### Perform `apt` clenup operations
 
 `autoremove` is used to remove packages that were automatically installed to
 satisfy dependencies for other packages and are now no longer needed as
@@ -748,7 +746,7 @@ $ sudo apt autoremove
 $ sudo apt clean
 ```
 
-#### List all packages with the word `kernel` in their name or description, whether installed or not
+### List all packages with the word `kernel` in their name or description, whether installed or not
 
 Name or description:
 
@@ -762,7 +760,7 @@ Name only:
 $ apt-cache search --names-only "kernel"
 ```
 
-#### List all installed kernel related packages
+### List all installed kernel related packages
 
 On debian based systems the word `linux` is used, not `kernel`.
 
@@ -770,21 +768,247 @@ On debian based systems the word `linux` is used, not `kernel`.
 $ dpkg --get-selections "*linux*"
 ```
 
-#### Use `apt` or `apt-cache` to show the package information for `bash`
+### Use `apt` or `apt-cache` to show the package information for `bash`
 
 ```
 $ apt-cache show bash
 ```
 
-#### Use `apt` or `apt-cache` to show all dependency relationships for `bash`
+### Use `apt` or `apt-cache` to show all dependency relationships for `bash`
 
 ```
 $ apt-cache depends bash
 $ apt-cache rdepends bash
 ```
 
-#### Use  `apt` or `apt-cache` to show all available `metapackages`
+### Use  `apt` or `apt-cache` to show all available `metapackages`
 
 ```
 $ apt-cache search metapackage
+```
+
+## Monitoring
+
+### Use the `proc` filesystem to check the `threads-max` parameter
+
+```
+$ cat /proc/sys/kernel/threads-max
+7675
+```
+
+### Use the `proc` filesystem to modify the `threads-max` parameter and set it to `100 000`
+
+```
+$ sudo bash -c 'echo 100000 > /proc/sys/kernel/threads-max'
+vagrant@ubuntu-bionic:/tmp$ cat /proc/sys/kernel/threads-max
+100000
+```
+
+### Use `sysctl` to modify the `threads-max` parameter and set it to `150 000`
+
+```
+$ sudo sysctl kernel.threads-max=150000
+kernel.threads-max = 150000
+```
+
+### Use the `sys` filesystem to check the available network devices
+
+```
+$ ls -l /sys/class/net
+```
+
+### Enable `Systems Activity Reporter (SAR) ` data collection using `Systems Activity Data Collector (SADC`
+
+```
+$ sudo cat /etc/default/sysstat
+#
+# Default settings for /etc/init.d/sysstat, /etc/cron.d/sysstat
+# and /etc/cron.daily/sysstat files
+#
+
+# Should sadc collect system activity informations? Valid values
+# are "true" and "false". Please do not put other values, they
+# will be overwritten by debconf!
+ENABLED="true"
+```
+
+Reports are written to log files in:
+
+```
+/var/log/sysstat/sa[DD]
+```
+
+### List two ways to visually display process ancestry
+
+```
+$ ps auxf
+$ pstree
+```
+
+### Run `ps` so that only the process ID, priority, nice value, and the process command line are displayed
+
+```
+$ ps -o pid,pri,nice,cmd
+```
+
+### Display the amount of free and used memory in the system
+
+```
+$ free -m
+```
+
+### Use the `proc` filesystem to display how memory is being used
+
+```
+$ cat /proc/meminfo
+```
+
+### List the tunable (writable) Virtual Memory system files in the `proc` filesystem
+
+```
+$ ls /proc/sys/vm
+```
+
+### Use the appropriate tool to report on virtual memory statistics
+
+```
+$ vmstat 5 5
+```
+
+### Use the `proc` filesystem to allow for all memory requests to overcommit
+
+```
+$ cat /proc/sys/vm/overcommit_memory
+0
+$ sudo bash -c 'echo 1 > /proc/sys/vm/overcommit_memory'
+```
+
+### Determine the `oom_score` of an arbitary process using the `proc filesystem`
+
+```
+$ cat /proc/835/oom_score
+```
+
+### Use the io statistics tool to report on a snapshot of io statistics
+
+```
+$ iostat
+```
+
+### Continuously report on io statistics
+
+```
+$ sudo apt -y install iotop
+$ sudo iotop
+```
+
+## I/O Scheduling
+
+### Set the I/O scheduling class of your terminal to real time with the highest priority
+
+```
+$ sudo ionice --class 1 --classdata 0 -p 2028
+$ ionice
+realtime: prio 0
+```
+
+### Determine which I/O schedulers are available for disk `/dev/sda`
+
+```
+$ cat /sys/block/sda/queue/scheduler
+noop deadline [cfq]
+```
+
+### Change the I/O scheduler for disk `/dev/sda` to a new valid setting
+
+```
+# echo deadline > /sys/block/sda/queue/scheduler
+# cat /sys/block/sda/queue/scheduler
+noop [deadline] cfq
+```
+
+### Check whether `/dev/sda` is an SSD or not since this has I/O scheduling algorithm implications
+
+```
+# cat /sys/block/sda/queue/rotational
+1
+```
+
+Thats means the kernel thinks we have a rotational hard disk.
+
+## Virtual Filesystem (VFS) Layer
+
+### Create a file with `touch` and then a hard and soft link to the file, use `ls` to confirm `inode` behaviour
+
+```
+$ touch file
+$ ln file file-hard
+$ ln -s file file-soft
+$ ls -li .
+2553 -rw-rw-r-- 2 vagrant vagrant    0 Dec 21 19:12 file
+2553 -rw-rw-r-- 2 vagrant vagrant    0 Dec 21 19:12 file-hard
+2557 lrwxrwxrwx 1 vagrant vagrant    4 Dec 21 19:13 file-soft -> file
+```
+
+### Get the current list of supported filesystems
+
+```
+$ cat /proc/filesystems
+```
+
+### List the partition tables for all devices
+
+```
+$ sudo fdisk -l
+```
+
+### List all available block devices and include information about their filesystems
+
+```
+$ lsblk --fs
+```
+
+### Use the `GPT` specific program to print whether `GPT` format is being used on `/dev/sda`
+
+```
+$ sudo sgdisk -p /dev/sda
+
+***************************************************************
+Found invalid GPT and valid MBR; converting MBR to GPT format
+in memory.
+***************************************************************
+```
+
+### Create a backup of the master boot record (MBR) then confirm that the file is a MBR backup
+
+```
+$ sudo dd if=/dev/sda of=mbrbackup bs=512 count=1
+$ sudo file mbrbackup
+mbrbackup: DOS/MBR boot sector
+```
+
+### Use the `GPT` specific program to create a backup of the MBR
+
+```
+$ sudo sgdisk --backup mbrbackup2 /dev/sda
+
+***************************************************************
+Found invalid GPT and valid MBR; converting MBR to GPT format
+in memory.
+***************************************************************
+
+The operation has completed successfully.
+$ file mbrbackup2
+mbrbackup2: DOS/MBR boot sector
+```
+
+### List the partitions the OS is currently aware of
+
+```
+$ cat /proc/partitions
+major minor  #blocks  name
+
+   8        0   10485760 sda
+   8        1   10484719 sda1
+   8       16      10240 sdb
 ```
