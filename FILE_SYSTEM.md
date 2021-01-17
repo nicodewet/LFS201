@@ -44,3 +44,27 @@ that we have `4` 1024 byte blocks for geek.txt which matches the minimum block s
 ```
 $ sudo du --apparent-size /home -h
 ``` 
+
+## Change the file `geek.txt` to be append only, check the extended attributes of the file before and after
+
+```
+$ lsattr geek.txt
+--------------e--- geek.txt
+vagrant@ubuntu-bionic:~$ sudo chattr +a geek.txt
+vagrant@ubuntu-bionic:~$ lsattr geek.txt
+-----a--------e--- geek.txt
+```
+
+## Change all files in `/home/vagrant` so that the secure deletion extended attribute of all files is set
+
+```
+$ chattr -R +s /home/vagrant
+```
+
+## Configure the system to force a filesystem error check and repair on reboot including on the root filesystem, then reboot
+
+```
+$ man fsck
+$ sudo touch /forcefsck
+$ sudo reboot
+```
