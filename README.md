@@ -27,144 +27,15 @@ Then `vagrant up`, `vagrant ssh`, `cd vagrant` and let's crack on.
 
 ## Networking
 
-### find which port/protocol postgresql is meant to use
-
-```
-$ grep postgres /etc/services
-postgresql	5432/tcp	postgres	# PostgreSQL Database
-postgresql	5432/udp	postgres
-```
-
-To filter out just the ports:
-
-```
-$ grep postgres /etc/services | awk '{print $2}'
-5432/tcp
-5432/udp
-```
-
-### show all network devices
-
-```
-$ ip link show
-```
-
-### get the `PID/Program name` listening on UDP and TCP ports
-
-Use `sudo` to get the `PID/Program name`. The `ss` command provides richer output.
-
-```
-$ sudo netstat --tcp --udp --numeric --listening --program
-$ sudo netstat -tunlp
-$ sudo ss --tcp --udp --listening --numeric --processes
-$ sudo ss tulnp
-```
-
-### find which process is listening on port 22
-
-Using the list open files command: `lsof`
-
-```
-$ sudo lsof -iTCP:22 -sTCP:LISTEN
-```
-
-### find which processes are listening on ssh ports as defined in `/etc/services`
-
-```
-$ sudo lsof -iTCP:ssh -sTCP:LISTEN
-```
+[Networking](NETWORKING.md)
 
 ## Storage Management
 
-### Create a virtual loop device `/dev/loop0` using 1GB file `/root/loopbackfile.img` with ext4 filesystem
-
-Do not mount the device (we'll do that in the next step). Note `man losteup` has a handy example.
-
-```
-$ sudo dd if=/dev/zero of=/root/loopbackfile.img bs=100M count=10
-$ sudo du -sh /root/loopbackfile.img
-$ sudo losetup --find --show --partscan /root/loopbackfile.img
-$ sudo losetup --all
-$ sudo mkfs.ext4 /root/loopbackfile.img
-```
-
-### Temporarily mount `/dev/loop0` on `/mnt/backup`, make a `.tar.bz2` file on `/mnt/backup`, then unmount
-
-```
-$ sudo mkdir -p /mnt/backup
-$ sudo mount -o loop /dev/loop0 /mnt/backup
-$ sudo tar -cvjSf tmp.tar.bz2 /tmp/
-$ sudo cp tmp.tar.bz2 /mnt/backup/
-$ sudo umount /mnt/backup
-```
-
-Breaking down the tar commmand:
-
-- `-c` (--create): create a new archive
-- `-v` (--verbose:): verbosely list files processed 
-- `-j` (--bzip2): filter the archive through bzip2
-- `-S` (--sparse): handle sparse files efficiently 
-- `-f` (--file): use specified archive file
-
-### Temporarily mount `/dev/loop0` on `/mnt/backup`, decompress and unarchive `/mnt/backup/tmp.tar.bz2` to `/opt`
-
-```
-$ sudo tar -xvf /mnt/backup/tmp.tar.bz2 -C /opt
-$ sudo mount -o loop /dev/loop0 /mnt/backup
-```
-
-### List all partition table devices as mentioned in `/proc/partitions`
-
-```
-$ sudo fdisk -l
-```
+[Storage Management](STORAGE_MANAGEMENT.md)
 
 ## File System
 
-### Get the file system block size in bytes
-
-The `-l` option lists the contents of the filesystem superblock, including the current values of the parameters 
-that can be set via this program.
-
-```
-$ sudo tune2fs -l | grep -i 'block size'
-Block size:               4096
-```
-
-### How much hard drive space is taken up (`devoted`) by a 2 byte file
-
-The minimum amount of file system real estate (hard drive blocks) that can be devoted to a file is 1 block and
-so is determined by the file system block size which can be found as follows and in this case it is 4 KB.
-
-```
-$ sudo tune2fs -l | grep -i 'block size'
-Block size:               4096
-``` 
-
-### Explain `du` output on a one character file `echo "1" > geek.txt`
-
-See [How to Get the Size of a File of Directory in Linux](https://www.howtogeek.com/450366/how-to-get-the-size-of-a-file-or-directory-in-linux/) as background.
-
-```
-$ echo "1" > geek.txt
-$ hexdump -C geek.txt
-00000000  31 0a                                             |1.|
-00000002
-$ du geek.txt
-4	geek.txt
-$ sudo tune2fs -l /dev/sda1 | grep -i 'block size'
-Block size:               4096
-```
-
-From the above we know geek.txt is composed of 2 bytes for `1` and a line feed character. Because we know the default block size
-is `4096` bytes the `du geek.txt` output must mean `du` is using the default assumption of 1024 bytes per block and so reports
-that we have `4` 1024 byte blocks for geek.txt which matches the minimum block size of `4096` bytes.
-
-### List the apparent sizes on `/home` rather than the disk usage
-
-```
-$ sudo du --apparent-size /home -h
-``` 
+[File System](FILE_SYSTEM.md)
 
 ## Processes
 
