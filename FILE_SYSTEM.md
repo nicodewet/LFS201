@@ -64,7 +64,57 @@ $ chattr -R +s /home/vagrant
 ## Configure the system to force a filesystem error check and repair on reboot including on the root filesystem, then reboot
 
 ```
-$ man fsck
 $ sudo touch /forcefsck
 $ sudo reboot
+```
+
+## List the currently mounted filesystems
+
+```
+$ mount
+```
+
+## Display the PIDs of processes using the `/home` directory
+
+```
+$ fuser -m /home
+/home:                3374rce  3471rce
+```
+
+## Provide detailed ext2/ext3/ext4 filesystem information on `/dev/sda1` or any relevant device
+
+```
+$ sudo dumpe2fs /dev/sda1 | less
+```
+
+## Check if your system is able to support filesystem quotas on any filesystem
+
+Here we are checking if any filesystem has been mounted with the `usrquota` or `grpquota` mount options since without this linux
+filesystem quota enforcement will not work.
+
+```
+$ egrep 'usrquota|grpquota' /etc/fstab
+```
+
+## List the filesystem disk space usage in human readable format and by type
+
+Note `df` stands for disk free.
+
+```
+$ df -hT
+Filesystem     Type      Size  Used Avail Use% Mounted on
+udev           devtmpfs  480M     0  480M   0% /dev
+tmpfs          tmpfs      99M  600K   98M   1% /run
+/dev/sda1      ext4      9.7G  2.0G  7.8G  20% /
+tmpfs          tmpfs     493M     0  493M   0% /dev/shm
+tmpfs          tmpfs     5.0M     0  5.0M   0% /run/lock
+tmpfs          tmpfs     493M     0  493M   0% /sys/fs/cgroup
+vagrant        vboxsf    113G   88G   26G  78% /vagrant
+tmpfs          tmpfs      99M     0   99M   0% /run/user/1000
+```
+
+## Get the disk usage of the `\bin` directory at a top level
+
+```
+$ sudo du -d0 -h /bin
 ```

@@ -56,3 +56,7 @@ Then `vagrant up`, `vagrant ssh`, `cd vagrant` and let's crack on.
 ## Virtual Filesystem (VFS) Layer
 
 [Virtual Filesystem Layer](VIRTUAL_FILESYSTEM_LAYER.md)
+
+## Virtual Memory Layer
+
+[Virtual Memory Layer](VIRTUAL_MEMORY.md)
