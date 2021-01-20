@@ -37,6 +37,8 @@ Then `vagrant up`, `vagrant ssh`, `cd vagrant` and let's crack on.
 
 [File System](FILE_SYSTEM.md)
 
+Read this [EXT4 Data Structure and Algorithms book](https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html) when time allows, but unlikely to be tested in the exam.
+
 ## Processes
 
 [Processes](PROCESSES.md)

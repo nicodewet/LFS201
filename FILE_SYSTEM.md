@@ -118,3 +118,54 @@ tmpfs          tmpfs      99M     0   99M   0% /run/user/1000
 ```
 $ sudo du -d0 -h /bin
 ```
+
+## Print ALL the super block and block group information for the filesystem present on the `/dev/sda1` device
+
+`-l     List the contents of the filesystem superblock, including the current values of the parameters that can be set via this program.`
+
+```
+$ sudo tune2fs -l /dev/sda1
+```
+
+## List the contents of the ext4 superblock, including the current values of parameters which can be changed
+
+```
+$ sudo tune2fs -l /dev/sda1
+```
+
+## Confirm that the max-mount-count of ext4 filesystem is at the default which is -1
+
+`If max-mount-counts is 0 or -1, the number of times the filesystem is mounted will be disregarded
+              by e2fsck(8) and the kernel.
+Mount-count-dependent checking is disabled by default to avoid unanticipated long reboots while e2fsck does its work. However, you may wish to consider the consequences of disabling mount-count-dependent checking entirely. 
+Bad disk drives, cables, memory, and kernel bugs could all corrupt a filesystem without marking the filesystem dirty or in error. If you are using journaling on your filesystem, your filesystem will never be marked dirty, so it will not normally be checked. A filesystem error detected by the kernel will still force an fsck on the next reboot, but it may already be too late to prevent data loss at that point.
+`
+
+```
+$ sudo tune2fs -l /dev/sda1 | grep 'Maximum mount count'
+Maximum mount count:      -1
+```
+
+## Change the maximum number of mounts between ext4 filesystem checks (max-mount-count) to 25
+
+```
+$ sudo tune2fs -c 25 /dev/sda1
+tune2fs 1.44.1 (24-Mar-2018)
+Setting maximal mount count to 25
+```
+
+## Change the time interval between ext4 filesystem checks (interval-between-checks) to 10 days
+
+`
+-i  interval-between-checks[d|m|w]
+Adjust the maximal time between two filesystem checks.  No suffix or d will interpret the number interval-between-checks as days, m as months, and w as weeks. A value of zero will disable the 
+time-dependent checking. There are pros and cons to disabling these periodic checks; see the 
+discussion under the -c (mount-count-dependent check) option for details.
+`
+
+```
+$ sudo tune2fs -i 10d /dev/sda1
+tune2fs 1.44.1 (24-Mar-2018)
+Setting interval between checks to 864000 seconds
+```
+
