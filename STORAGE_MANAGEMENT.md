@@ -93,19 +93,29 @@ $ sudo cryptsetup luksFormat --type luks2 /dev/sda
 ### Create the un-encrypted pass through device by opening the encrypted block device, i.e., secret-disk.
 
 ```
-$ sudo cryptsetup luksOpen /dev/sda secret-disk
+$ sudo cryptsetup luksOpen /dev/sda kinga
 Enter passphrase for /dev/sda:
-$ ls /dev/mapper/secret-disk
+$ ls /dev/mapper/kinga
 ```
 
 ### Format the filesystem as an ext4 filesystem.
 
 ```
-$ sudo mkfs -t ext4 /dev/mapper/secret-disk
+$ sudo mkfs -t ext4 /dev/mapper/kinga
 ```
 
-### Create a mount point for the new filesystem, `/mnt/kinga`
+### Create a mount point for the new filesystem, `/mnt/kinga` and mount the encrypted block device
 
 ```
 $ sudo mkdir -p /mnt/kinga
+$ sudo mount /dev/mapper/kinga /mnt/kinga
+```
+
+### List the entire manual mounting and unmounting procedure for the encrypted USB key
+
+```
+$ sudo cryptsetup luksOpen /dev/sda kinga
+Enter passphrase for /dev/sda:
+$ sudo mount /dev/mapper/kinga /mnt/kinga
+$ sudo umount /mnt/kinga
 ```
