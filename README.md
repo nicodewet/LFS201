@@ -62,3 +62,7 @@ Read this [EXT4 Data Structure and Algorithms book](https://www.kernel.org/doc/h
 ## Virtual Memory Layer
 
 [Virtual Memory Layer](VIRTUAL_MEMORY.md)
+
+## Kernel Services and Modules
+
+[Kernel Services and Modules](KERNEL.md)
